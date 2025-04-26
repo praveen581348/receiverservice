@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Received Messages</title>
+</head>
+<body>
+    <h1>Received Kafka Messages</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Content</th>
+                <th>Received At</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="message : ${messages}">
+                <td th:text="${message.id}"></td>
+                <td th:text="${message.content}"></td>
+                <td th:text="${#temporals.format(message.receivedAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
