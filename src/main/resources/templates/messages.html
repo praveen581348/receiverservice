@@ -1,11 +1,32 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Received Messages</title>
+    <title>Kafka Dashboard</title>
 </head>
 <body>
-    <h1>Received Kafka Messages</h1>
-    <table>
+    <h1>Kafka Messages (Not Yet Saved)</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Message</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr th:each="msg : ${kafkaMessages}">
+            <td th:text="${msg}"></td>
+            <td>
+                <form th:action="@{/saveToDb}" method="post">
+                    <input type="hidden" name="message" th:value="${msg}" />
+                    <button type="submit">Save to MySQL</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h1>Messages from MySQL</h1>
+    <table border="1">
         <thead>
             <tr>
                 <th>ID</th>
@@ -14,12 +35,16 @@
             </tr>
         </thead>
         <tbody>
-            <tr th:each="message : ${messages}">
-                <td th:text="${message.id}"></td>
-                <td th:text="${message.content}"></td>
-                <td th:text="${#temporals.format(message.receivedAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
-            </tr>
+        <tr th:each="msg : ${dbMessages}">
+            <td th:text="${msg.id}"></td>
+            <td th:text="${msg.content}"></td>
+            <td th:text="${#temporals.format(msg.receivedAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        </tr>
         </tbody>
     </table>
+
+    <form th:action="@{/saveToRedis}" method="post">
+        <button type="submit">Save All MySQL Messages to Redis</button>
+    </form>
 </body>
 </html>

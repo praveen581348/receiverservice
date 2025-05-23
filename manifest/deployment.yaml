@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: receiverservice
-          image: praveen581348/receiverservice:17 # Replace with your Docker image
+          image: praveen581348/receiverservice:23 # Replace with your Docker image
           ports:
             - containerPort: 8084
           env:
