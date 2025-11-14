@@ -1,6 +1,0 @@
-2025-05-19T16:07:46.468Z	info	service@v0.126.0/service.go:199	Setting up own telemetry...	{"resource": {}}
-2025-05-19T16:07:46.479Z	info	service@v0.126.0/service.go:266	Starting otelcol-contrib...	{"resource": {}, "Version": "0.126.0", "NumCPU": 8}
-2025-05-19T16:07:46.479Z	info	extensions/extensions.go:41	Starting extensions...	{"resource": {}}
-2025-05-19T16:07:46.480Z	info	otlpreceiver@v0.126.0/otlp.go:116	Starting GRPC server	{"resource": {}, "otelcol.component.id": "otlp", "otelcol.component.kind": "receiver", "endpoint": "localhost:4317"}
-2025-05-19T16:07:46.482Z	info	otlpreceiver@v0.126.0/otlp.go:173	Starting HTTP server	{"resource": {}, "otelcol.component.id": "otlp", "otelcol.component.kind": "receiver", "endpoint": "localhost:4318"}
-2025-05-19T16:07:46.482Z	info	service@v0.126.0/service.go:289	Everything is ready. Begin running and processing data.	{"resource": {}}

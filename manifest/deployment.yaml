@@ -6,7 +6,7 @@ metadata:
   labels:
     app: receiverservice
 spec:
-  replicas: 1 # You can scale this as needed
+  replicas: 1
   selector:
     matchLabels:
       app: receiverservice
@@ -17,18 +17,23 @@ spec:
     spec:
       containers:
         - name: receiverservice
-          image: praveen581348/receiverservice:23 # Replace with your Docker image
+          image: praveen581348/receiverservice:31 # Ensure this is your latest image
           ports:
             - containerPort: 8084
           env:
+            # CRITICAL FIX: Forces the application server to listen on all interfaces (0.0.0.0)
+            - name: SERVER_ADDRESS
+              value: "0.0.0.0"
+            
             - name: SPRING_PROFILES_ACTIVE
-              value: "kubernetes" # Ensure the kubernetes profile is active
+              value: "kubernetes"
             - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
               value: "kafka.messaging.svc.cluster.local:9092"
-          #  resources: # Optional: Define resource requests and limits
-          #    requests:
-          #      cpu: 100m
-          #      memory: 128Mi
-          #    limits:
-          #      cpu: 500m
-          #      memory: 512Mi
+          # Resources section remains commented out as requested
+          #  resources: 
+          #    requests:
+          #      cpu: 100m
+          #      memory: 128Mi
+          #    limits:
+          #      cpu: 500m
+          #      memory: 512Mi
