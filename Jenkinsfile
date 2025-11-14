@@ -21,7 +21,6 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                // --- UPDATED STEP ---
                 // Clones the specific public repository and branch
                 git url: 'https://github.com/praveen581348/receiverservice.git', branch: 'master'
             }
@@ -33,10 +32,11 @@ pipeline {
                 
                 // This block securely provides the 'nexus-settings' file (from Managed files)
                 // and injects the 'nexus_cred' credentials as environment variables.
-                configFileProvider([configFile(fileId: 'nexus-settings', variable: 'nexus-settings')]) {
+                configFileProvider([configFile(fileId: 'nexus-settings', variable: 'MAVEN_SETTINGS')]) {
                     withCredentials([usernamePassword(credentialsId: 'nexus_cred', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASS')]) {
                         
                         // Use -s $MAVEN_SETTINGS to force Maven to use our settings file
+                        // This fixes the 401 Unauthorized error
                         sh "mvn clean deploy -DskipTests -s $MAVEN_SETTINGS"
                     }
                 }
