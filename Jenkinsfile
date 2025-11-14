@@ -32,7 +32,7 @@ pipeline {
                 
                 // This block securely provides the 'nexus-settings' file (from Managed files)
                 // and injects the 'nexus_cred' credentials as environment variables.
-                configFileProvider([configFile(fileId: '4e4cc9f8-9810-45b6-9849-df5eafa95c2e', variable: 'MAVEN_SETTINGS')]) {
+                configFileProvider([configFile(fileId: 'nexus-settings', variable: 'MAVEN_SETTINGS')]) {
                     withCredentials([usernamePassword(credentialsId: 'nexus_cred', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASS')]) {
                         
                         // Use -s $MAVEN_SETTINGS to force Maven to use our settings file
