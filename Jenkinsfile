@@ -23,7 +23,7 @@ pipeline {
             steps {
                 // --- UPDATED STEP ---
                 // Clones the specific public repository and branch
-                git url: 'https://github.com/praveen581348/receiverservice.git', branch: 'main'
+                git url: 'https://github.com/praveen581348/receiverservice.git', branch: 'master'
             }
         }
 
